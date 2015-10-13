@@ -39,13 +39,13 @@ def median_2x2(a, startA, b, startB):
             c.append(b[j])
             j = j + 1
             countB = countB + 1
-    return (c[1] + c[2]) / 2
+    return (c[1] + c[2]) / 2.0
             
 def findMedian(a, b):
     if len(a) == 0:
         return 0
     elif len(a) == 1:
-        return (a[0] + b[0]) / 2
+        return (a[0] + b[0]) / 2.0
     else:
         startA, startB = findStart_2x2(a, b)
         return median_2x2(a, startA, b, startB)
@@ -53,7 +53,7 @@ def findMedian(a, b):
 if len(sys.argv) == 2:
     fileName = sys.argv[1]
 else:
-    fileName = 'data.txt'
+    fileName = 'data1.txt'
 try:
     f = open(fileName, 'r')
     while True:
