@@ -10,6 +10,8 @@ def position(number, n):
 def generate(a, lenA, n, shift):
     if shift == 0:
         g = a[0:n]
+        if g[0] == '0':
+            return False, ''
         return True, g
 
     nextStr = ''
@@ -19,9 +21,10 @@ def generate(a, lenA, n, shift):
         nextStr = a[shift:]
         if nextStr[0] == '0':
             return False, ''
-        last = int(a[:shift]) + 1
+
+        last = int('1' + a[:shift]) + 1
         lastStr = str(last)
-        nextStr = nextStr + lastStr[len(lastStr) - shift:]
+        nextStr = nextStr + lastStr[1:]
     if nextStr[0] == '0':
         return False, ''
     prevInt = int(nextStr) - 1
@@ -91,8 +94,10 @@ def check(a, lenA, n, prevMin):
 
 
 def firstOccurrence(a, prevMin):
-    if a == '0':
-        return 11
+    if int(a) == 0:
+        start = '1' + a
+        n = len(start)
+        return position(int(start), n) + 1
     n = 1
     lenA = len(a)
     while n <= lenA:
@@ -105,8 +110,11 @@ def firstOccurrence(a, prevMin):
 
 while True:
     try:
-        prevMin = input("Enter the number: ")
-        a = str(prevMin)
+        a = raw_input("Enter the number: ")
+        if len(a) > 0 and a[0] == '0':
+            prevMin = int('1' + a)
+        else:
+            prevMin = int(a)
         fo = firstOccurrence(a, prevMin)
         print(fo)
     except:
